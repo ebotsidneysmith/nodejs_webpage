@@ -18,12 +18,16 @@ jobs:
       - checkout
       - setup_remote_docker:
           docker_layer_catching: false
-      - run:
-          name: Build Docker Image
+       - run:
+          name: Build Docker image
           command: |
             docker build -t ebotsidneysmith/nodejswebapp:latest .
+      - run:
+          name: Push application Docker image
+          command: |
             echo "$DOCKER_PASSWORD" | docker login -u ebotsidneysmith --password-stdin
             docker push ebotsidneysmith/nodejswebapp:latest
+
 
 workflows:
   build_test:
