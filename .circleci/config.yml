@@ -22,6 +22,39 @@ jobs:
           name: Build Docker Image
           command: 
             TAG=my-image-tag
+            docker build -t ebotsidneysmith/testRepo:$TAG .
+            # Optional: Push the image to a registry
+            echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+            docker push ebotsidneysmith/testRepo:$TAG
+
+workflows:
+  build_test:
+    jobs:
+      - build_test
+      - build_docker_imageversion: 2.1
+
+jobs:
+  build_test:
+    docker: 
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - run:
+          name: Install npm dependencies
+          command:
+            npm install --save
+
+  build_docker_image:
+    docker:
+      - image: circleci/node:12
+    steps:
+      - checkout
+      - setup_remote_docker:
+          docker_layer_catching: false
+      - run:
+          name: Build Docker Image
+          command: 
+            TAG=my-image-tag
             docker build -t circlecirepo/newimage:$TAG .
             echo $DOCKER_PASSWORD | docker login -u ebotsidneysmith --password-
             docker push circlecirepo/newimage:$TAG
