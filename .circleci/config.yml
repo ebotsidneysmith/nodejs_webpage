@@ -23,7 +23,7 @@ jobs:
           command: 
             TAG=my-image-tag
             docker build -t circlecirepo/newimage:$TAG .
-            echo $DOCKER_PASSWORD | docker login -u ebotsidneysmith --password-stdin
+            echo $DOCKER_PASSWORD | docker login -u ebotsidneysmith --password-
             docker push circlecirepo/newimage:$TAG
 
 workflows:
