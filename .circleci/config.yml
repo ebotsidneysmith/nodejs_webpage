@@ -22,7 +22,7 @@ jobs:
           name: Build Docker Image
           command: 
             docker build -t ebotsidneysmith/nodejswebapp:latest .
-            echo $DOCKER_PASSWORD | docker login -u ebotsidneysmith --password-stdin
+            echo "$DOCKER_PASSWORD" | docker login -u ebotsidneysmith --password-stdin
             docker push ebotsidneysmith/nodejswebapp:latest
 
 workflows:
