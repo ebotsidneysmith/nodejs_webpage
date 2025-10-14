@@ -23,7 +23,6 @@ jobs:
           command: 
             TAG=my-image-tag
             docker build -t circlecirepo/newimage:$TAG .
-            # Optional: Push the image to a registry
             echo $DOCKER_PASSWORD | docker login -u ebotsidneysmith --password-stdin
             docker push circlecirepo/newimage:$TAG
 
