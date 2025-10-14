@@ -8,7 +8,7 @@ jobs:
       - checkout
       - run:
           name: Install npm dependencies
-          command:
+          command: |
             npm install --save
 
   build_docker_image:
@@ -20,7 +20,7 @@ jobs:
           docker_layer_catching: false
       - run:
           name: Build Docker Image
-          command: 
+          command: |
             docker build -t nodejswebapp:latest .
             echo "$DOCKER_PASSWORD" | docker login -u ebotsidneysmith --password-stdin
             docker push nodejswebapp:latest
